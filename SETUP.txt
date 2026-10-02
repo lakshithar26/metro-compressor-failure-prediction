@@ -1,0 +1,48 @@
+================================================================================
+SETUP & RUN INSTRUCTIONS
+================================================================================
+
+1. ACTIVATE VIRTUAL ENVIRONMENT
+--------------------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction
+source venv/bin/activate
+
+Your prompt should now show (venv) at the beginning.
+
+
+2. RUN JUPYTER LAB
+------------------
+jupyter lab
+
+This opens JupyterLab in your browser at http://localhost:8888
+
+
+3. OPEN THE NOTEBOOK
+--------------------
+Navigate to: notebooks/01_eda.ipynb
+
+
+4. QUICK ONE-LINER
+------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction && source venv/bin/activate && jupyter lab
+
+
+5. ALTERNATIVE OPTIONS
+----------------------
+JupyterLab (recommended):  jupyter lab
+Classic Notebook:          jupyter notebook
+VS Code:                   Open folder in VS Code, install Jupyter extension, select venv as kernel
+
+
+6. DEACTIVATE WHEN DONE
+-----------------------
+deactivate
+
+
+7. INSTALL NEW PACKAGES
+-----------------------
+source venv/bin/activate
+pip install <package-name>
+pip freeze > requirements.txt
+
+================================================================================
