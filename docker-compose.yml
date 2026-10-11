@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  scoring-api:
+    build: .
+    container_name: metro-compressor-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  simulator:
+    build: .
+    container_name: metro-compressor-simulator
+    depends_on:
+      scoring-api:
+        condition: service_healthy
+    volumes:
+      - ./dataset:/app/dataset:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "-m", "src.streaming.simulator", "--api", "http://scoring-api:8000/predict", "--speed", "100", "--failure", "4"]
+    profiles:
+      - simulate
