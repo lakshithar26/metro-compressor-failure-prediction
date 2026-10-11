@@ -18,3 +18,7 @@ __pycache__/
 models/*.pkl
 models/*.joblib
 models/*.h5
+
+# Processed data
+data/processed/*
+!data/processed/.gitkeep
