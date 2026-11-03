@@ -4,6 +4,7 @@ dataset/*
 # Project plan (local reference)
 PROJECT_PLAN.txt
 UNDERSTANDING.txt
+SETUP.txt
 
 # Virtual environment
 venv/
