@@ -36,7 +36,7 @@ DATA_FILE = DATA_DIR / "MetroPT3(AirCompressor).csv"
 
 # Constants
 ANALOGUE_SIGNALS = ['TP2', 'TP3', 'H1', 'DV_pressure', 'Oil_temperature', 'Motor_current']
-DIGITAL_SIGNALS = ['COMP', 'DV_electric', 'Towers', 'MPG', 'LPS', 'Pressure_switch', 'Oil_level', 'Caudal_impulses']
+DIGITAL_SIGNALS = ['COMP', 'DV_eletric', 'Towers', 'MPG', 'LPS', 'Pressure_switch', 'Oil_level', 'Caudal_impulses']
 WINDOW_SIZE = 60
 
 # Thresholds (from training)

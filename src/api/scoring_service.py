@@ -95,7 +95,7 @@ class SensorReading(BaseModel):
     Motor_current: float
     # Digital signals (optional)
     COMP: Optional[int] = None
-    DV_electric: Optional[int] = None
+    DV_eletric: Optional[int] = None
     Towers: Optional[int] = None
     MPG: Optional[int] = None
     LPS: Optional[int] = None

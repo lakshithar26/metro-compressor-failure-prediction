@@ -45,4 +45,103 @@ source venv/bin/activate
 pip install <package-name>
 pip freeze > requirements.txt
 
+
+================================================================================
+STREAMING PIPELINE
+================================================================================
+
+8. RUN API SERVER (Local)
+-------------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction
+source venv/bin/activate
+python -m src.api.scoring_service
+
+API will be available at: http://localhost:8000
+- Health check:  GET  http://localhost:8000/health
+- Predict:       POST http://localhost:8000/predict
+- Model info:    GET  http://localhost:8000/model/info
+
+
+9. RUN DATA SIMULATOR (in a separate terminal)
+----------------------------------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction
+source venv/bin/activate
+
+# Replay failure #4 at 100x speed
+python -m src.streaming.simulator --failure 4 --speed 100
+
+# Replay specific row range
+python -m src.streaming.simulator --start 1000 --end 2000 --speed 50
+
+# Replay full dataset (slow)
+python -m src.streaming.simulator --speed 1000
+
+Options:
+  --failure 1|2|3|4    Replay specific failure period
+  --speed N            Playback speed multiplier (default: 10)
+  --start N            Start row index
+  --end N              End row index
+  --verbose            Show all predictions
+
+
+================================================================================
+DOCKER DEPLOYMENT
+================================================================================
+
+10. RUN WITH DOCKER
+-------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction
+
+# Build and start API service
+docker-compose up scoring-api
+
+# Run with simulator (replays failure #4)
+docker-compose --profile simulate up
+
+# Run in background
+docker-compose up -d scoring-api
+
+# Stop services
+docker-compose down
+
+
+11. TEST API WITH CURL
+----------------------
+# Health check
+curl http://localhost:8000/health
+
+# Send a sample reading
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "TP2": 8.5,
+    "TP3": 8.4,
+    "H1": 0.0,
+    "DV_pressure": 0.0,
+    "Oil_temperature": 65.0,
+    "Motor_current": 0.0
+  }'
+
+# Reset feature buffer
+curl -X POST http://localhost:8000/reset
+
+
+================================================================================
+DASHBOARD
+================================================================================
+
+12. RUN STREAMLIT DASHBOARD
+---------------------------
+cd /home/lakshitha/Desktop/metro-compressor-failure-prediction
+source venv/bin/activate
+streamlit run app/dashboard.py
+
+Dashboard will open at: http://localhost:8501
+
+Features:
+- Historical Analysis: View sensor data and anomaly scores for failure periods
+- Live Simulation: Stream data with real-time anomaly detection and alerts
+- Signal visualization with threshold indicators
+- Alert system for detected anomalies
+
 ================================================================================

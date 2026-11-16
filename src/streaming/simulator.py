@@ -19,7 +19,7 @@ DEFAULT_API_URL = "http://localhost:8000/predict"
 # Signals to stream
 SIGNALS = [
     'TP2', 'TP3', 'H1', 'DV_pressure', 'Oil_temperature', 'Motor_current',
-    'COMP', 'DV_electric', 'Towers', 'MPG', 'LPS', 'Pressure_switch', 'Oil_level', 'Caudal_impulses'
+    'COMP', 'DV_eletric', 'Towers', 'MPG', 'LPS', 'Pressure_switch', 'Oil_level', 'Caudal_impulses'
 ]
 
 
