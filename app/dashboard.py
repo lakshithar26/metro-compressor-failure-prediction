@@ -314,12 +314,14 @@ def live_simulation(df, model, scaler, feature_cols):
         for idx in range(st.session_state.sim_idx, end_idx):
             row = df.iloc[idx]
 
-            # Store in history
+            # Store in history (all analogue signals needed for features)
             record = {
                 'timestamp': row['timestamp'],
-                'Oil_temperature': row['Oil_temperature'],
                 'TP2': row['TP2'],
+                'TP3': row['TP3'],
                 'H1': row['H1'],
+                'DV_pressure': row['DV_pressure'],
+                'Oil_temperature': row['Oil_temperature'],
                 'Motor_current': row['Motor_current'],
             }
 
